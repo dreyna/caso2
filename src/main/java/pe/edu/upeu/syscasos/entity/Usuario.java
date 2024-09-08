@@ -3,6 +3,8 @@ package pe.edu.upeu.syscasos.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.data.annotation.Reference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -41,11 +43,12 @@ public class Usuario {
 	@Column(name="estado")
 	private char estado;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.MERGE, optional= false)
+	@Reference
 	@JoinColumn(name="empleado_id", referencedColumnName = "id")
 	private Empleado empleado;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "usuario")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "usuario")
 	@JsonIgnore
 	private Set<Renta> renta;
 	

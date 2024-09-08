@@ -1,6 +1,8 @@
 package pe.edu.upeu.syscasos.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +39,7 @@ public class Empleado {
 	@Column(name="estado")
 	private char estado;
 	
-	@OneToOne(mappedBy = "empleado")
+	@OneToOne(mappedBy = "empleado", optional=true)
+	@JsonIgnore
 	private Usuario usuario;
 }

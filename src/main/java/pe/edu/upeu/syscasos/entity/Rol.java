@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,11 +35,11 @@ public class Rol {
 	@Column(name="estado")
 	private char estado;
 	
-	@ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<Acceso> accesos= new HashSet<>();
 	
-	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<Usuario> usuarios= new HashSet<>();
 	
